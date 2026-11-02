@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segundometro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            font-size: 25px;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            background-color: #121412;
+            background-image: radial-gradient(#1e261b 15%, transparent 16%);
+            background-size: 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .cartao-militar {
+            background: #2A3426;
+            border: 3px solid #3B4937;
+            outline: 2px solid #C2B280;
+            border-radius: 8px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+        }
+
+        .divisa-sargento {
+            margin: 0 auto 15px auto;
+            width: 70px;
+            height: 150px;
+        }
+
+        .divisa-sargento svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6));
+        }
+
+        .titulo-patente {
+            font-size: 50px;
+            letter-spacing: 2px;
+            color: #C2B280;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .contador-frase {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #E2E8F0;
+        }
+
+        .numero-dias {
+            display: inline-block;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #D4AF37;
+            background: #1E261B;
+            border: 1px solid #D4AF37;
+            padding: 2px 16px;
+            border-radius: 4px;
+            margin: 8px 4px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cartao-militar">
+            <div class="divisa-sargento">
+            <svg viewBox="0 0 100 100">
+                <polyline points="15,35 50,10 85,35" fill="none" stroke="#D4AF37" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+                <polyline points="15,55 50,30 85,55" fill="none" stroke="#D4AF37" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+                <polyline points="15,75 50,50 85,75" fill="none" stroke="#D4AF37" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+                <polyline points="15,95 50,70 85,95" fill="none" stroke="#D4AF37" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+            </svg>
+        </div>
+
+       
+
+        <p class="contador-frase" id="mensagem">
+            <h1>Faltam</h1> 
+            <h2><span id="dias" class="numero-dias">0</span></h2>
+            <h1>dias para promoção à</h1> 
+        </p>
+         <div class="titulo-patente">2º Sargento</div>
+    </div>
+
+    <script>
+        function atualizarContador() {
+            const dataHoje = new Date();
+            const dataAlvo = new Date(2026, 11, 1); // 01/12/2026
+
+            dataHoje.setHours(0, 0, 0, 0);
+            dataAlvo.setHours(0, 0, 0, 0);
+
+            const diferencaTempo = dataAlvo - dataHoje;
+            const diferencaDias = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24));
+
+            const elementoDias = document.getElementById('dias');
+            const elementoMensagem = document.getElementById('mensagem');
+
+            if (diferencaDias > 0) {
+                elementoDias.textContent = diferencaDias;
+            } else if (diferencaDias === 0) {
+                elementoMensagem.innerHTML = 'A promoção é <span style="color:#D4AF37">hoje</span>!';
+            } else {
+                elementoMensagem.innerHTML = 'A promoção já <span style="color:#D4AF37">encerrou</span>!';
+            }
+        }
+
+        atualizarContador();
+    </script>
+
+</body>
+</html>
